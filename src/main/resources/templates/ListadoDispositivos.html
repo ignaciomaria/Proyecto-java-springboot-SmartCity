@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Listado de Eventos - SmartCity</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cambria&display=swap');
+    
+    .menu-item:hover {
+      background-color: lightgray;
+    }
+  
+    body {
+      font-family: 'Cambria', sans-serif;
+      background: linear-gradient(to bottom right, blue, gray);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+    }
+    
+    .main-content {
+      display: flex;
+      align-items: flex-start;
+      width: 100%;
+    }
+    
+    .top-image {
+      max-width: 100%;
+      width: 100%;
+      display: block;
+      height: 20vh;
+      object-fit: cover;
+      border: 2px solid #000;
+    }
+    
+    .sidebar {
+      width: 15%;
+      background: linear-gradient(to bottom, #ffffff, #999);
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      padding: 20px;
+    }
+    
+    .menu {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+    
+    .menu-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    
+    .menu-item {
+      margin-bottom: 10px;
+      width: 100%;
+      border-bottom: 1px solid #000;
+      padding-bottom: 5px;
+    }
+    
+    .menu-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    
+    .menu-item a {
+      text-decoration: none;
+      color: #000;
+      font-weight: bold;
+    }
+    
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #fff;
+      padding: 20px;
+      border: 2px solid #000;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 3%;
+      max-width: 80%;
+    }
+    
+    .center-image {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+    
+    footer {
+      font-size: 12px;
+      text-align: center;
+      padding: 10px;
+      background: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      margin-top: auto;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    th {
+      background-color: #f2f2f2;
+    }
+    
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .button-group button {
+      padding: 5px 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    
+    .button-group .alta-button {
+      background-color: green;
+      color: white;
+    }
+    
+    .button-group .baja-button {
+      background-color: red;
+      color: white;
+    }
+    
+    .button-group .info-button {
+      background-color: rgb(0, 128, 192);
+      color: white;
+      text-decoration: none;
+    }
+    
+    .cancel-button {
+      background: red;
+      color: #fff;
+      text-decoration: none;
+      padding: 5px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 15px;
+      
+    }
+    
+  </style>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <img class="top-image" th:src="@{img/unla-portada.jpg}" alt="Top Image">
+  <div class="main-content">
+    <div class="sidebar">
+      <div class="menu">
+        <div class="menu-title">Menú - Tipo Usuario</div>
+        <br>
+        <div class="menu-item"><a href="/dispositivos/crear-sensor-humedad">Alta Sensor Humedad</a></div>
+		<div class="menu-item"><a href="/dispositivos/crear-sensor-luz">Alta Sensor Luz</a></div>
+        <div class="menu-item"><a href="/dispositivos/listado-dispositivos">Funcion Dispositivo</a></div>
+        <div class="menu-item"><a href="/eventos/listado-eventos">Lista de eventos</a></div>
+        <br>
+        <div class="menu-item"><a href="#">Cerrar Sesión</a></div>
+      </div>
+    </div>
+    <div class="content">
+      <h1>Listado de Dispositivos</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Dispositivo</th>
+            <th>Activo</th>
+            <th>Descripción</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr th:each="disp : ${dispositivosLista}">
+            <td><span th:text="${disp.nombre}"/></td>
+            <td><span th:text="${disp.activo}"/></td>
+            <td><span th:text="${disp.descripcion}"/></td>
+            <td>
+              <div class="button-group">
+					<form th:action="@{/dispositivos/alta/{id}(id=${disp.id})}" method="post">
+                        <button class="alta-button" type="submit">Alta</button>
+                    </form>
+					<form th:action="@{/dispositivos/baja/{id}(id=${disp.id})}" method="post">
+                        <button class="baja-button" type="submit">Baja</button>
+                    </form>
+                    <form th:action="@{/eventos/listado-eventos/{id}(id=${disp.id})}" method="post">
+                        <button class="info-button" type="submit">Info</button>
+                    </form>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+   	
+	    <div>
+	      <button class="cancel-button" type="button" value="cancelar"><a class="cancel-button" href="/">Cancelar</a></button>
+	    </div>   
+	</div>    	
+  </div>
+  <footer>
+    <p>Grupo 15 O2 - Cristian Sandoval, Ignacio Maria</p>
+  </footer>
+</body>
+</html>

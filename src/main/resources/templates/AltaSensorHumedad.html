@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SmartCity - Registro de Usuario</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cambria&display=swap');
+    
+    body {
+      font-family: 'Cambria', sans-serif;
+      background: linear-gradient(to bottom right, blue, gray);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+    }
+    
+    .register-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    
+    .register-box {
+      text-align: center;
+      background: #fff;
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    h1 {
+      color: blue;
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+    
+    a{
+		text-decoration: none;
+	}
+    
+    input[type="text"],
+    input[type="password"],
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+    
+    .submit-button {
+      background: green;
+      color: #fff;
+    }
+    
+    .cancel-button {
+      background: red;
+      color: #fff;
+    }
+    
+    footer {
+      font-size: 12px;
+      text-align: center;
+      padding: 10px;
+      background: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      margin-top: auto;
+    }
+  </style>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <div class="register-container">
+    <div class="register-box">
+      <h1>Alta de Dispositivo</h1>
+      
+      <form th:action="@{/dispositivos/alta-sensor-humedad}" th:object="${sensorhumedad}" method="post">
+		
+        <select Text="Tipo de Dispositivo" th:field="*{nombre}">
+          <option th:value="Sensor+' '+Humedad">Sensor Humedad</option>
+        </select>
+        
+        <input type="text" placeholder="Descripción" text="Descripción" th:field="*{descripcion}">
+        <div>
+          <button class="submit-button" type="submit" value="enviar">Enviar</button>
+          <button class="cancel-button" type="button" value="cancelar"><a class="cancel-button" href="/">Cancelar</a></button>
+        </div>
+      </form>
+      
+    </div>
+  </div>
+  <footer>
+    <p>Grupo 15 O2 - Cristian Sandoval, Ignacio Maria</p>
+  </footer>
+</body>
+</html>
