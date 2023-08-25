@@ -1,4 +1,12 @@
-# Proyecto Spring Grupo15-OO2-2023
-.Cristian Sandoval
+# Descripcion 
 
-.Ignacio Maria
+Proyecto realizado para la catedra de Orientacion a Objatos 2 - UNLa
+
+Tecnologias:
+.Java
+.Springboot
+.Hibernate
+.MySql
+.HTML
+.CSS
+.Thymeleaf
