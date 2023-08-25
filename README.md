@@ -3,16 +3,16 @@
 Proyecto realizado para la catedra de Orientacion a Objatos 2 - UNLa
 
 Tecnologias:
-.Java
+. Java
 
-.Springboot
+. Springboot
 
-.Hibernate
+. Hibernate
 
-.MySql
+. MySql
 
-.HTML
+. HTML
 
-.CSS
+. CSS
 
-.Thymeleaf
+. Thymeleaf
